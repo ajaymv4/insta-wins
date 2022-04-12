@@ -13,14 +13,18 @@ public class RandomGeneratorService {
 
     /**
      * This method generates a random number not greater than passed param
-     * @param max
-     * @return
      */
     public RandomGeneratorResponse generateRandomBasedOnSeed(int max){
-        RandomDataGenerator randomDataGenerator = new RandomDataGenerator();
-        int randomWithRandomDataGenerator = randomDataGenerator.nextInt(1, max);
         RandomGeneratorResponse response = new RandomGeneratorResponse();
-        response.setRandomNumber(randomWithRandomDataGenerator);
+        if(max > 0) {
+            RandomDataGenerator randomDataGenerator = new RandomDataGenerator();
+            int randomWithRandomDataGenerator = randomDataGenerator.nextInt(1, max);
+            response.setMessage("Success");
+            response.setRandomNumber(randomWithRandomDataGenerator);
+            return response;
+        } else{
+            response.setMessage("Max should be a positive number");
+        }
         return response;
     }
 
